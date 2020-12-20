@@ -2,23 +2,18 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>办公室连接打印机 | Gridea</title>
 <link rel="shortcut icon" href="https://zip-sun.github.io/favicon.ico?v=1608464125799">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://zip-sun.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://zip-sun.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="办公室连接打印机 | Gridea - Atom Feed" href="https://zip-sun.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
-
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+    <meta name="description" content="前言
+折腾了一上午，终于把打印机配置好了，查了好多资料，有说用IP的，也有说开启Guest账户（考虑到Guest存在的安全风险故没有采用）。
+场景：小型办公室，三台电脑连在一个Tenda交换机（质量很差，经常断网）。一台XP，两台Win7，..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,37 +76,57 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              办公室连接打印机
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-10-31
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h1 id="前言">前言</h1>
+<p>折腾了一上午，终于把打印机配置好了，查了好多资料，有说用IP的，也有说开启Guest账户（考虑到Guest存在的安全风险故没有采用）。</p>
+<p>场景：小型办公室，三台电脑连在一个Tenda交换机（质量很差，经常断网）。一台XP，两台Win7，打印机连在一台Win7上。</p>
+<p>因为已经配置好了，这里只写文字说明，不附图。</p>
+<h2 id="主机连接打印机配置">主机（连接打印机）配置</h2>
+<p>在网络和共享中心，将网络位置设置为工作网络。</p>
+<p>更改高级共享设置，启用网络发现和打印机共享。</p>
+<p>打开设备和打印机，选择要共享的打印机，右键“打印机属性”。共享选项卡下面勾选“共享这台打印机”。</p>
+<p>右键桌面上的计算机，属性里面查看计算机名（例如：John-789dhd887）。</p>
+<p>或者运行cmd，使用ipconfig查看IP v4地址（例如：192.168.1.1）。</p>
+<h2 id="win7设置">win7设置</h2>
+<p>确保同样开启网络发现。</p>
+<p>打开桌面上的网络，在扫描到的电脑里找到主机。</p>
+<p>双击打开，里面会出现共享的交换机。</p>
+<p>双击后提示安装。</p>
+<h2 id="xp配置">XP配置</h2>
+<p>打开网上邻居，选择“设置家庭或小型办公网络。</p>
+<p>一直下一步，工作组输入WORKGROUP。</p>
+<p>之后提示是否在其他电脑安装网上邻居时选择最后已完成安装。</p>
+<p>然后在地址栏输入\主机的IP地址（例如：\192.168.1.1）。</p>
+<p>之后会出现共享的打印机，双击安装。</p>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li>有极高概率会在网络（网上邻居）中打不开局域网中的电脑。建议多试几次，或者重新插拔一下交换机或路由器的网线。又或者检查一下是否被杀毒软件或防火墙拦截。</li>
+<li>此方法也可用来在局域网电脑之间互传文件。</li>
+<li>懂得配置防火墙的话最好配置一下，以防局域网内的电脑病毒传播。</li>
+</ol>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#%E4%B8%BB%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%89%93%E5%8D%B0%E6%9C%BA%E9%85%8D%E7%BD%AE">主机（连接打印机）配置</a></li>
+<li><a href="#win7%E8%AE%BE%E7%BD%AE">win7设置</a></li>
+<li><a href="#xp%E9%85%8D%E7%BD%AE">XP配置</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></li>
 </ul>
 </li>
 </ul>
@@ -121,6 +136,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://zip-sun.github.io/post/zai-2020-nian-shi-yong-windows-xp/">
+              <h3 class="post-title">
+                在2020年使用 Windows XP
+              </h3>
+            </a>
+          </div>
         
 
         

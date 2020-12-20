@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zip-sun.github.io</id>
     <title>Gridea</title>
-    <updated>2020-12-20T11:24:14.705Z</updated>
+    <updated>2020-12-20T11:35:33.484Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zip-sun.github.io"/>
     <link rel="self" href="https://zip-sun.github.io/atom.xml"/>
@@ -10,6 +10,385 @@
     <logo>https://zip-sun.github.io/images/avatar.png</logo>
     <icon>https://zip-sun.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[尝试排查 Windows 8.1 中 System 进程占用 CPU 过高的问题]]></title>
+        <id>https://zip-sun.github.io/post/chang-shi-pai-cha-windows-81-zhong-system-jin-cheng-zhan-yong-cpu-guo-gao-de-wen-ti/</id>
+        <link href="https://zip-sun.github.io/post/chang-shi-pai-cha-windows-81-zhong-system-jin-cheng-zhan-yong-cpu-guo-gao-de-wen-ti/">
+        </link>
+        <updated>2020-12-20T11:35:12.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B">排查过程</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+(文章目录)</p>
+<h1 id="前言">前言</h1>
+<p>最近把旧电脑重装了 Win8.1，但是一直存在 System 进程占用 20% 左右的情况，遂尝试排查。<br>
+<img src="https://img-blog.csdnimg.cn/20201215190223550.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<h1 id="排查过程">排查过程</h1>
+<p>根据知乎上的说法，首先去下载 <a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/process-explorer">Process Explorer</a>，解压后运行<br>
+procexp64.exe ，许可协议，在里面找到 System 进程，双击打开新窗口，点击 Threads 选项卡查看。<br>
+<img src="https://img-blog.csdnimg.cn/20201215190633836.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+从图中可以看出是 <a href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/kernel/acpi-driver">ACPI.sys</a> 占用过高。由于涉及驱动，优先从驱动开始排查</p>
+<hr>
+<p>首先是查看有没有需要更新的驱动，排查后发现 Intel 的显卡驱动需要更新。<br>
+<img src="https://img-blog.csdnimg.cn/20201215191403849.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+重启后还是不行……</p>
+<hr>
+<p>之后我在同问题下发现这个回答：<br>
+<img src="https://img-blog.csdnimg.cn/20201215201501832.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+很巧的是我正好是这种情况。</p>
+<p>遂拆机，很幸运的是，店家买的硬盘支架上带着二维码，很快找到了商品链接。而且在商品详情里正好标注着通道开关的说明：<br>
+<img src="https://img-blog.csdnimg.cn/20201215202134875.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<p>调到最右边后安装回去，重启。<br>
+<img src="https://img-blog.csdnimg.cn/20201215202248988.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<p>问题解决，给知乎大佬点赞！</p>
+<h1 id="注意事项">注意事项</h1>
+<p>点击 Threads 选项卡可能弹窗提示缺少<a href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/debugger/">Debugging Tools</a>，需要下载 <a href="https://go.microsoft.com/fwlink/p/?LinkId=323507">Windows 8.1 SDK</a> 安装包，在安装过程中单独勾选【Debugging Tools for WIndows】，之后会联网下载安装（总体约 350MB）。</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://www.zhihu.com/question/47512666">关于win10 system进程 占用CPU过高的问题？</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Chome和Edge通过组策略配置IE模式和总是允许Flash（官方方案）]]></title>
+        <id>https://zip-sun.github.io/post/chome-he-edge-tong-guo-zu-ce-lue-pei-zhi-ie-mo-shi-he-zong-shi-yun-xu-flashguan-fang-fang-an/</id>
+        <link href="https://zip-sun.github.io/post/chome-he-edge-tong-guo-zu-ce-lue-pei-zhi-ie-mo-shi-he-zong-shi-yun-xu-flashguan-fang-fang-an/">
+        </link>
+        <updated>2020-12-20T11:34:53.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%B8%80-%E5%87%86%E5%A4%87">一、准备</a></li>
+<li><a href="#%E4%BA%8C-%E9%85%8D%E7%BD%AE">二、配置</a>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85%E6%B5%8F%E8%A7%88%E5%99%A8">1.安装浏览器</a></li>
+<li><a href="#2%E5%AF%BC%E5%85%A5%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF">2.导入政策模板</a></li>
+<li><a href="#3%E9%85%8D%E7%BD%AE%E7%BB%84%E7%AD%96%E7%95%A5">3.配置组策略</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AEie%E6%A8%A1%E5%BC%8F">配置IE模式</a>
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%951%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0">方法1：直接添加</a></li>
+<li><a href="#%E6%96%B9%E6%B3%952%E4%BD%BF%E7%94%A8xml%E6%96%87%E4%BB%B6%E6%8E%A8%E8%8D%90">方法2：使用xml文件（推荐）</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AEflash">配置Flash</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF%E5%8F%82%E8%80%83">三、政策模板参考</a></li>
+<li><a href="#%E5%9B%9B-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">四、参考资料</a></li>
+</ul>
+(文章目录)</p>
+<h1 id="前言">前言</h1>
+<p>记录一下官方的解决方案。</p>
+<h1 id="一-准备">一、准备</h1>
+<p>支持组策略的 Windows 版本（需要专业版及以上）</p>
+<p><a href="https://cloud.google.com/chrome-enterprise/browser/download/">下载企业版Chrome</a>（包含 LBS支持插件、Chrome 政策模板，即组策略配置文件）</p>
+<hr>
+<p>Edge 用户需要两个工具：<br>
+<a href="https://www.microsoft.com/zh-cn/edge/business/download">下载并部署新型 Microsoft Edge 商业版</a>（选择好版本后，才能下载对应的政策模板）<br>
+<a href="https://www.microsoft.com/en-us/download/details.aspx?id=49974">Enterprise Mode Site List Manager</a>（用于配置IE模式）</p>
+<h1 id="二-配置">二、配置</h1>
+<h2 id="1安装浏览器">1.安装浏览器</h2>
+<p>两者解压后都是 msi 格式的安装包（例如GoogleChromeStandaloneEnterprise64.msi），安装过程全静默安装，默认在系统目录。</p>
+<h2 id="2导入政策模板">2.导入政策模板</h2>
+<p>以 Chrome 为例，将 admx 文件放在 C:\Windows\PolicyDefinitions 目录下，<br>
+<img src="https://img-blog.csdnimg.cn/20201212112231964.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+接着，将 zh-CN 和 en-US 目录下面的文件放在该目录的同名文件夹里面。</p>
+<p>Edge做法同理。</p>
+<p>Win + R 打开运行 gpedit.msc 打开组策略，在 计算机配置→管理模板 下面就能看到相关设置。<br>
+<img src="https://img-blog.csdnimg.cn/20201212112653533.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<h2 id="3配置组策略">3.配置组策略</h2>
+<p><em><strong>提示：浏览器地址栏输入 chrome://policy/ 可查看当前启用的策略。</strong></em></p>
+<h3 id="配置ie模式">配置IE模式</h3>
+<p><em><strong>注意：Chrome 的 LBS 的作用是将非列表内的网站全部用Chrome打开，开启后打开IE会直接跳转到Chrome。</strong></em><br>
+Chrome需要先安装 LegacyBrowserSupport.msi ，此插件会在IE中添加一个加载项，确保它是启用状态。</p>
+<p>Edge在安装的时候就会添加一个加载项。</p>
+<h4 id="方法1直接添加">方法1：直接添加</h4>
+<p>Google→Google Chrome→Legacy Browser Support→启用“旧版浏览器支持”功能（BrowserSwitcherEnabled）</p>
+<p>然后启用【要在替代浏览器中打开的网站（BrowserSwitcherUrlList）】，输入网址即可。</p>
+<h4 id="方法2使用xml文件推荐">方法2：使用xml文件（推荐）</h4>
+<p><strong>使用xml文件的好处是不需要单独配置，只需要配置好文件就可以在 Chrome 和 Edge 中使用。</strong></p>
+<p>使用上面安装的Enterprise Mode Site List Manager（具体使用方法参照下面的参考资料）。<br>
+<img src="https://img-blog.csdnimg.cn/20201212130338478.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy">比较简单的做法是点击 Add ，输入网站（不带http前缀），然后打勾 Allow Redirect后，点 Save 就可以了。</p>
+<p>然后左上角 File→save to XML，保存到一个好记的位置。</p>
+<p>之后如果要做出修改，改好后保存时覆盖原文件即可。</p>
+<p>Chrome 在启动 LBS 之后，启用【与包含要在替代浏览器中加载的网址的 XML 文件对应的网址（BrowserSwitcherExternalSitelistUrl）】，在文本框内填入 file:///d:/Documents/sites.xml （根据你保存的文件路径和文件名而定）。</p>
+<hr>
+<p>Microsoft Edge→配置 Internet Explorer 集成，设置【Internet Explorer 模式】<br>
+然后找到【配置企业模式站点列表】，同样的方法添加文件路径。</p>
+<p><em><strong>此外，还有一个方法是启用【允许 Internet Explorer 模式测试】，启用后将在 Edge浏览器的菜单→更多工具中出现【在 Internet Explorer 模式下打开站点】的选项，相当于双核浏览器的切换按钮。</strong></em></p>
+<h3 id="配置flash">配置Flash</h3>
+<p><em><strong>注：该方法只能针对特定网站开启 Flash，不能设置全局。</strong></em></p>
+<p>当前 Chrome（版本87）仅保留了【将 Flash 内容设置的涵盖面扩展到所有内容（RunAllFlashInAllowMode）】，考虑到未来版本可能会移除，本文不再赘述。</p>
+<hr>
+<p><em><strong>注：Edge 配置需要 87 以下版本，最新版本中<a href="https://docs.microsoft.com/zh-cn/DeployEdge/microsoft-edge-policies#pluginsallowedforurls">以下策略不再生效</a>。</strong></em></p>
+<p>Microsoft Edge→将 Adobe Flash 内容设置扩展到所有内容（RunAllFlashInAllowMode）</p>
+<p>Microsoft Edge→内容设置→允许对特定网站使用 Adobe Flash 插件（PluginsAllowedForUrls）</p>
+<p>Microsoft Edge→内容设置→默认 Adobe Flash 设置（DefaultPluginsSetting）</p>
+<h1 id="三-政策模板参考">三、政策模板参考</h1>
+<ul>
+<li><a href="https://cloud.google.com/docs/chrome-enterprise/policies">Chrome 企业版政策列表与管理</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/deployedge/microsoft-edge-policies">Microsoft Edge - 策略</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/deployedge/microsoft-edge-policy-map-chrome-to-newedge">Google Chrome 到 Microsoft Edge 策略映射</a></li>
+</ul>
+<h1 id="四-参考资料">四、参考资料</h1>
+<ul>
+<li><a href="https://support.google.com/chrome/a/answer/187202?hl=zh-Hans">为受管理的 PC 设置 Chrome 浏览器政策</a></li>
+<li><a href="https://support.google.com/chrome/a/answer/9268614?hl=en&amp;ref_topic=9270153">Legacy Browser Support (integrated) for Windows</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/DeployEdge/edge-ie-mode-policies#configure-internet-explorer-integration">配置 IE 模式策略</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/internet-explorer/ie11-deploy-guide/add-single-sites-to-enterprise-mode-site-list-using-the-version-2-enterprise-mode-tool">使用 Enterprise Mode Site List Manager（架构 v.2）将单个站点添加到企业模式站点列表</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MI5s安装LineageOS 16]]></title>
+        <id>https://zip-sun.github.io/post/mi5s-an-zhuang-lineageos-16/</id>
+        <link href="https://zip-sun.github.io/post/mi5s-an-zhuang-lineageos-16/">
+        </link>
+        <updated>2020-12-20T11:34:31.000Z</updated>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4%E9%80%9F%E8%A7%88">步骤速览</a>
+<ul>
+<li><a href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87">前期准备</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5twrp%E6%B8%85%E9%99%A4%E6%95%B0%E6%8D%AE">刷入TWRP清除数据</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5%E7%B3%BB%E7%BB%9F">刷入系统</a>
+<ul>
+<li><a href="#%E7%BA%BF%E5%88%B7">线刷</a></li>
+<li><a href="#%E5%8D%A1%E5%88%B7%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9">卡刷（我的选择）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%B7%E5%9B%9Emiui">刷回MIUI</a>
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87">准备</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+(目录)</p>
+<h1 id="前言">前言</h1>
+<p>之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网查了一下。结合自己的经验和遇到的问题，做出整理。</p>
+<h1 id="前提">前提</h1>
+<ol>
+<li><a href="https://www.miui.com/download-319.html">MIUI最新开发版刷机包</a></li>
+<li><a href="https://developer.android.com/studio/releases/platform-tools?hl=zh-cn">ADB</a>（Android SDK Platform-Tools）（<a href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn">CN链接</a>）</li>
+<li><a href="https://download.lineageos.org/capricorn">LineageOS</a></li>
+<li><a href="https://dl.twrp.me/capricorn">TWRP</a>（替换自带的Recovery）</li>
+<li><a href="ttps://opengapps.org">OpenGapps</a>（我选择的是ARM64+9.0+nano）（可选）</li>
+<li><a href="https://download.lineageos.org/extras">SU</a>（可选）</li>
+<li><a href="https://developer.android.com/studio/run/win-usb">ADB驱动</a>（启动USB调试后电脑无法安装驱动时使用）（<a href="https://developer.android.google.cn/studio/run/win-usb">CN链接</a>）</li>
+</ol>
+<h1 id="步骤速览">步骤速览</h1>
+<h2 id="前期准备">前期准备</h2>
+<ol>
+<li><strong>刷机前先备份数据（玩国际服游戏的记得先把引继码记下来）</strong></li>
+<li>下载 LineageOS 16.0 最新版本，TWRP 最新版本，ADB安装包和驱动，SU包，MIUI最新开发版；</li>
+<li>解锁手机设备。<br>
+手机设置 -&gt; 开发者选项 -&gt; 设备解锁状态”中绑定账号和设备，根据官方教程解锁；<br>
+手动进入Bootloader模式（关机后，同时按住开机键和音量下键）；通过USB连接手机，点击 “解锁”按钮；</li>
+<li>解压ADB包到一个电脑位置，如：D:\adb；</li>
+<li>电脑中，打开“高级系统设置&quot;，打开”高级“标签，打开“环境变量”，“系统变量”中选择path，并点击“编辑”；</li>
+<li>变量值末尾添加“D:\adb；（与ADB解压路径名一致）；确定；</li>
+<li>测试在CMD中输入adb回车后是否能够正常使用；</li>
+</ol>
+<h2 id="刷入twrp清除数据">刷入TWRP清除数据</h2>
+<ol start="8">
+<li>设置→我的设备→全部参数，连续按MIUI版本，开启开发者选项。</li>
+<li>更多设置→开发者选项，开启USB调试；</li>
+<li>手机连接电脑，CMD 下输入 adb devices 看手机是否能弹出调试授权窗口；<strong>（我这里没有正常识别到设备，见参考资料[3]）</strong></li>
+<li>输入“adb reboot bootloader”，回车，手机界面出现fastboot和安卓兔；</li>
+<li>cmd命令窗口，输入“fastboot devices”，回车，命令窗口出现设备编号；</li>
+<li>cmd命令窗口，输入“fastboot flash recovery”， 将下载的TWRP文件拖入命令窗口，回车，等待安装完成；<br>
+（也可以Fastboot flash recovery “安装包路径名”，回车）</li>
+<li>直接按 volume up+power键出现MI，进入 Team Recovery 界面（如果重启了手机则系统回刷回原Recovery）；</li>
+<li>选择“清除”--“高级清除”--选择除内部存储和USB以外的各项；“清除”--“格式化data分区”；</li>
+</ol>
+<h2 id="刷入系统">刷入系统</h2>
+<p>这里分为两种方法：</p>
+<h3 id="线刷">线刷</h3>
+<ol start="16">
+<li>选择“高级选项”--“ADB sideload”--滑动确认；</li>
+<li>电脑进入cmd命令窗口，输入“Adb sideload”，拖入MIUI安装包，回车，等待安装完成；</li>
+<li>安装成功后再进入TWRP，电脑进入cmd命令窗口，输入“Adb sideload”，拖入LineageOS 16.0安装包，回车，等待安装完成（刷入OS包时，最好选择双清）；</li>
+<li>重复此过程，安装Google apps（必须）；</li>
+<li>重复此过程，安装SU（可选）；</li>
+<li>重启手机，进入Lineage系统，安装完成。</li>
+</ol>
+<h3 id="卡刷我的选择">卡刷（我的选择）</h3>
+<ol start="16">
+<li>启动TWRP后电脑的USB能识别到U盘，将MIUI的包放进去。</li>
+<li>点击“安装”，刷入镜像，将MIUI刷入。</li>
+<li>相同的方法再安装LineageOS，刷入。</li>
+<li>视情况再安装其他如Gapps、SU、Magisk等等。</li>
+</ol>
+<h1 id="刷回miui">刷回MIUI</h1>
+<h2 id="准备">准备</h2>
+<ol>
+<li><a href="https://www.xiaomiflash.com/">Xiaomi Flash Tool</a></li>
+<li>MIUI刷机包</li>
+</ol>
+<h2 id="步骤">步骤</h2>
+<p>（懒得写了）</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://www.lineageos.org.cn/thread-1000-1-1.html">安卓手机小米5s的LineageOS 16.0刷机教程</a></li>
+<li><a href="https://wiki.lineageos.org/devices/capricorn/install">Install LineageOS on capricorn</a></li>
+<li><a href="https://www.cnblogs.com/wx170119/p/13092595.html">Win7连接手机提示ADB Interface 找不到驱动程序 解决办法</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[办公室连接打印机]]></title>
+        <id>https://zip-sun.github.io/post/ban-gong-shi-lian-jie-da-yin-ji/</id>
+        <link href="https://zip-sun.github.io/post/ban-gong-shi-lian-jie-da-yin-ji/">
+        </link>
+        <updated>2020-10-31T11:33:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>折腾了一上午，终于把打印机配置好了，查了好多资料，有说用IP的，也有说开启Guest账户（考虑到Guest存在的安全风险故没有采用）。</p>
+<p>场景：小型办公室，三台电脑连在一个Tenda交换机（质量很差，经常断网）。一台XP，两台Win7，打印机连在一台Win7上。</p>
+<p>因为已经配置好了，这里只写文字说明，不附图。</p>
+<h2 id="主机连接打印机配置">主机（连接打印机）配置</h2>
+<p>在网络和共享中心，将网络位置设置为工作网络。</p>
+<p>更改高级共享设置，启用网络发现和打印机共享。</p>
+<p>打开设备和打印机，选择要共享的打印机，右键“打印机属性”。共享选项卡下面勾选“共享这台打印机”。</p>
+<p>右键桌面上的计算机，属性里面查看计算机名（例如：John-789dhd887）。</p>
+<p>或者运行cmd，使用ipconfig查看IP v4地址（例如：192.168.1.1）。</p>
+<h2 id="win7设置">win7设置</h2>
+<p>确保同样开启网络发现。</p>
+<p>打开桌面上的网络，在扫描到的电脑里找到主机。</p>
+<p>双击打开，里面会出现共享的交换机。</p>
+<p>双击后提示安装。</p>
+<h2 id="xp配置">XP配置</h2>
+<p>打开网上邻居，选择“设置家庭或小型办公网络。</p>
+<p>一直下一步，工作组输入WORKGROUP。</p>
+<p>之后提示是否在其他电脑安装网上邻居时选择最后已完成安装。</p>
+<p>然后在地址栏输入\主机的IP地址（例如：\192.168.1.1）。</p>
+<p>之后会出现共享的打印机，双击安装。</p>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li>有极高概率会在网络（网上邻居）中打不开局域网中的电脑。建议多试几次，或者重新插拔一下交换机或路由器的网线。又或者检查一下是否被杀毒软件或防火墙拦截。</li>
+<li>此方法也可用来在局域网电脑之间互传文件。</li>
+<li>懂得配置防火墙的话最好配置一下，以防局域网内的电脑病毒传播。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在2020年使用 Windows XP]]></title>
+        <id>https://zip-sun.github.io/post/zai-2020-nian-shi-yong-windows-xp/</id>
+        <link href="https://zip-sun.github.io/post/zai-2020-nian-shi-yong-windows-xp/">
+        </link>
+        <updated>2020-07-06T11:29:53.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="在2020年使用-windows-xp">在2020年使用 Windows XP</h1>
+<pre><code>官方支持情况：
+主要支持：已于2009年4月8日到期
+扩展支持：已于2014年4月8日到期
+</code></pre>
+<p><strong><font color=#FF0000>文章最后更新日期：2020/10/24</font></strong></p>
+<h5 id="测试环境vmware-workstation-14x虚拟机-单核512m内存">测试环境：VMWare Workstation 14.x虚拟机 单核+512M内存</h5>
+<h5 id="使用镜像zh-hans_windows_xp_professional_with_service_pack_3_x86_cd_vl_x14-74070iso">使用镜像：zh-hans_windows_xp_professional_with_service_pack_3_x86_cd_vl_x14-74070.iso</h5>
+<h5 id="font-colorff0000切记如果要在实机重装系统1必须在安装前备份重要文件2从控制面板内检查系统当前安装的程序3从设备管理器确保其他设备如打印机的驱动程序能够在安装后恢复-font"><font color=#FF0000>切记：如果要在实机重装系统，①必须在安装前备份重要文件，②从控制面板内检查系统当前安装的程序，③从设备管理器确保其他设备（如打印机）的驱动程序能够在安装后恢复。</font></h5>
+<h2 id="补丁相关">补丁相关</h2>
+<h5 id="考虑到兼容问题本文不提及windows-embedded-posready-2009相关补丁">考虑到兼容问题，本文不提及Windows Embedded POSReady 2009相关补丁。</h5>
+<p>Windows Update与Microsoft Update已不可使用。建议使用<a href="http://www.xiazaiba.com/html/120.html">雨林木风的整合补丁</a>。</p>
+<p>此外自2014年后微软提供的几个XP补丁需要手动下载，可查阅<a href="http://www.zxinc.org/xppatch.htm">以下网址</a>。</p>
+<h3 id="个人认为很重要的">个人认为很重要的</h3>
+<p><a href="http://support.microsoft.com/kb/4012598">KB4012598</a>（Wanacry漏洞的紧急补丁）</p>
+<p><a href="http://support.microsoft.com/kb/4500331">KB4500331</a>（2019年发布的高危安全更新）</p>
+<p><a href="https://web.archive.org/web/20141101194012/https://support.microsoft.com/kb/942288">KB942288</a>（Windows Installer 4.5的更新补丁）</p>
+<p><a href="https://web.archive.org/web/20090213092021/http://support.microsoft.com/kb/955704">KB955704</a>（使XP支持exFAT格式）</p>
+<p><a href="https://web.archive.org/web/20090726175304/http://www.microsoft.com/china/Windows/default.aspx">cn_windows_internet_explorer_8_for_windows_xp_x86.exe</a>（<a href="http://baoku.360.cn/soft/show/appid/77">IE8 for XP</a>）</p>
+<h3 id="ie8补丁">IE8补丁</h3>
+<p><a href="https://www.catalog.update.microsoft.com/ScopedViewInline.aspx?updateid=b8d7147a-0628-44ac-9bd7-f03502930148">用于 Windows XP SP3 的 Internet Explorer 8 累积安全更新程序 (KB4018271)</a></p>
+<h3 id="可选补丁">可选补丁</h3>
+<p><a href="https://web.archive.org/web/20070704103613/http://support.microsoft.com/kb/925850">kb925850</a>（<a href="https://www.catalog.update.microsoft.com/Search.aspx?q=kb925850">WMP11下载</a>）</p>
+<p><a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=14577">VistaFont_CHS.EXE</a>（微软雅黑）</p>
+<p><a href="https://web.archive.org/web/20090213173827/http://www.microsoft.com/typography/ClearTypePowerToy.mspx">ClearType Tuner PowerToy</a>（启用ClearType高级设置）</p>
+<h2 id="office相关">Office相关</h2>
+<h3 id="2003">2003</h3>
+<h5 id="镜像sc_office_2003_proiso">镜像：sc_office_2003_pro.iso</h5>
+<p><a href="https://www.catalog.update.microsoft.com/ScopedViewInline.aspx?updateid=e2bd7f45-47f9-402f-8fda-14f78030fe70">kb923618</a>（SP3补丁包）</p>
+<p><a href="https://web.archive.org/web/20110623220025/http://support.microsoft.com/kb/924074">kb924074</a>（格式兼容包，需要SP3补丁）</p>
+<p><a href="https://www.catalog.update.microsoft.com/Search.aspx?q=kb2526297">kb2526297</a>（格式兼容包的SP3补丁，需要[KB942288]）</p>
+<h3 id="2007">2007</h3>
+<h5 id="镜像cn_office_enterprise_2007_dvd_vl_x12-19567iso">镜像：cn_office_enterprise_2007_DVD_VL_X12-19567.iso</h5>
+<h5 id="镜像zh-hans_office_standard_2007_x86_cd_x12-18931iso包含word-excel-powerpoint-outlook">镜像：zh-hans_office_standard_2007_x86_cd_x12-18931.iso（包含word、excel、PowerPoint、outlook）</h5>
+<p><a href="http://support.microsoft.com/kb/2526086">kb2526086</a>（SP3补丁包）</p>
+<p><a href="https://web.archive.org/web/20110623220025/http://support.microsoft.com/kb/924074">kb924074</a>（格式兼容包）</p>
+<p><a href="https://www.catalog.update.microsoft.com/Search.aspx?q=kb2526297">kb2526297</a>（格式兼容包的SP3补丁，需要[KB942288]）</p>
+<p>相关新闻： <a href="https://blogs.technet.microsoft.com/office_sustained_engineering/2017/11/16/end-of-support-for-the-excel-and-powerpoint-viewers-and-the-office-compatibility-pack/">《微软：结束对Excel和PowerPoint查看器以及Office兼容包的支持》</a></p>
+<h3 id="2010">2010</h3>
+<h5 id="镜像sw_dvd5_office_professional_plus_2010w_sp1_w32_chnsimp_core_mlf_x17-76734iso">镜像：SW_DVD5_Office_Professional_Plus_2010w_SP1_W32_ChnSimp_CORE_MLF_X17-76734.iso</h5>
+<p><a href="https://www.catalog.update.microsoft.com/ScopedViewInline.aspx?updateid=9c5e43a3-3ae9-434d-b105-a9d7902d5f9f">kb2687455</a>（SP2补丁包）</p>
+<h2 id="可用软件">可用软件</h2>
+<h5 id="标为版本即官方后续不再为xp提供更新版本标为当前版本即截至本文更新时官方仍在维护的版本">标为''版本''即官方后续不再为XP提供更新版本，标为''当前版本''即截至本文更新时官方仍在维护的版本。</h5>
+<h3 id="net-framework">.net Framework</h3>
+<p><strong>支持安装至.net4.0</strong></p>
+<p>下载地址：<a href="https://dotnet.microsoft.com/download/dotnet-framework">https://dotnet.microsoft.com/download/dotnet-framework</a></p>
+<p>dotnetfx35SP1.exe（包含从2.0到3.5SP1的内容）</p>
+<p>dotNetFx40_Full_x86_x64.exe</p>
+<h3 id="directx">DirectX</h3>
+<p>下载地址：https://www.microsoft.com/zh-CN/download/details.aspx?id=35</p>
+<p>或者使用<a href="https://blog.csdn.net/vbcom/article/details/7245186">DirectXRepair</a>，可以连带将C++运行库一起安装。</p>
+<h3 id="java">Java</h3>
+<p>版本：<a href="https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html">jre-7u80</a></p>
+<p>jre-7u80-windows-i586.exe</p>
+<p>版本：<a href="https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html">jdk-8u25</a></p>
+<p>jdk-8u25-windows-i586.exe</p>
+<h3 id="eclipse">eclipse</h3>
+<p>版本：<a href="https://www.eclipse.org/downloads/packages/release/photon">Photon(2018 June)</a></p>
+<h3 id="chrome">Chrome</h3>
+<p>版本：<a href="https://www.google.cn/chrome/">49</a></p>
+<h3 id="firefox">Firefox</h3>
+<p>版本：<a href="https://ftp.mozilla.org/pub/firefox/releases/52.9.0esr/win32/zh-CN/">52.9.0 ESR</a></p>
+<p>可以安装旧版本扩展。</p>
+<h3 id="mypal">Mypal</h3>
+<p>当前版本：<a href="https://github.com/Feodor2/Mypal/releases">28.14.2</a></p>
+<p>基于Pale Moon（Firefox内核）的开源浏览器，可<a href="https://github.com/Feodor2/Mypal/releases/download/28.13.1/mypal-lang-zh-cn-28.13.0.xpi">安装中文语言包</a>。</p>
+<p>安装中文语言包的方法：语言包拖入浏览器，安装后在地址栏输入about:config，同意警告后搜索general.useragent.locale，修改参数为zh-CN，之后重启浏览器。</p>
+<h3 id="k-lite-codec-pack">K-Lite Codec Pack</h3>
+<p>版本：<a href="http://www.codecguide.com/download_kl_old.htm#xp_last_version">13.8.5</a></p>
+<p>K-Lite_Codec_Pack_1385_Basic.exe</p>
+<p>视频解码器，直接安装Basic版可搭配系统自带的WMP使用。</p>
+<h3 id="谷歌拼音输入法">谷歌拼音输入法</h3>
+<p>版本：<a href="https://web.archive.org/web/20170620025940/https://www.google.com/intl/zh-CN/ime/pinyin/">2.7.23.124</a></p>
+<p>已经被废弃，但仍可以<a href="https://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe">下载</a>。</p>
+<h3 id="紫光华宇拼音输入法">（紫光）华宇拼音输入法</h3>
+<p>版本：<a href="http://unispim.com/software/index.php">V6.9</a></p>
+<p>unispim6.9.1.183.exe</p>
+<p>老牌输入法，支持输入界面大字体。</p>
+<p>原官网已更新，当前链接可能随时被作废。</p>
+<h3 id="优效日历">优效日历</h3>
+<p>当前版本：<a href="http://www.youxiao.cn/index.php/yxcalendar/">2.0.10.16</a></p>
+<p>win10风格的桌面日历，支持农历、天气、待办事项等多种功能。</p>
+<h3 id="adobe-flash-player">Adobe Flash Player</h3>
+<p>当前版本：<a href="https://helpx.adobe.com/cn/flash-player/kb/archived-flash-player-versions.html">32</a></p>
+<p>29版本为最后没有地区限制的版本。</p>
+<h3 id="adobe-photoshop">Adobe Photoshop</h3>
+<p>版本：CS6 13.0.1(13.1.3及以后不再支持)</p>
+<h3 id="adobe-premiere-pro">Adobe Premiere Pro</h3>
+<p>版本：CS4（<a href="https://forums.adobe.com/thread/2299562">参考链接</a>）</p>
+<h3 id="after-effects">After Effects</h3>
+<p>版本：CS4（<a href="https://helpx.adobe.com/nz/after-effects/system-requirements-old-versions.html">参考链接</a>）</p>
+<h3 id="bandizip">Bandizip</h3>
+<p>当前版本：<a href="https://cn.bandisoft.com/bandizip/old/">5.23</a></p>
+<h3 id="libreoffice">LibreOffice</h3>
+<p>版本：<a href="https://downloadarchive.documentfoundation.org/libreoffice/old/5.4.7.2/win/x86/">5.4.7.2</a></p>
+<h3 id="hashtab">HashTab</h3>
+<p>版本：<a href="http://implbits.com/products/hashtab/HashTab_v5.2.0.14_Setup.exe">5.2.0.14</a></p>
+<p>在文件属性中查看文件哈希值。</p>
+<h3 id="thunderbird">Thunderbird</h3>
+<p>版本：<a href="https://archive.mozilla.org/pub/thunderbird/releases/38.5.0/">38.5.0</a></p>
+<p>Mozilla制作的电子邮件客户端，<a href="https://support.mozilla.org/en-US/kb/get-latest-version-thunderbird-windows-xp-vista">相关帮助</a>。可以替换自带的Outlook Express。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://zip-sun.github.io/post/hello-gridea/</id>

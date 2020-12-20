@@ -1,0 +1,296 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chome和Edge通过组策略配置IE模式和总是允许Flash（官方方案） | Gridea</title>
+<link rel="shortcut icon" href="https://zip-sun.github.io/favicon.ico?v=1608464125799">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://zip-sun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Chome和Edge通过组策略配置IE模式和总是允许Flash（官方方案） | Gridea - Atom Feed" href="https://zip-sun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+前言
+一、准备
+二、配置
+
+1.安装浏览器
+2.导入政策模板
+3.配置组策略
+
+配置IE模式
+
+方法1：直接添加
+方法2：使用xml文件（推荐）
+
+
+配置Flash
+
+
+
+
+三、政策模板参考
+四、参考资料
+
+(文章目录)
+前言
+记录一下官..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zip-sun.github.io">
+  <img class="avatar" src="https://zip-sun.github.io/images/avatar.png?v=1608464125799" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Chome和Edge通过组策略配置IE模式和总是允许Flash（官方方案）
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-12-20
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%B8%80-%E5%87%86%E5%A4%87">一、准备</a></li>
+<li><a href="#%E4%BA%8C-%E9%85%8D%E7%BD%AE">二、配置</a>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85%E6%B5%8F%E8%A7%88%E5%99%A8">1.安装浏览器</a></li>
+<li><a href="#2%E5%AF%BC%E5%85%A5%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF">2.导入政策模板</a></li>
+<li><a href="#3%E9%85%8D%E7%BD%AE%E7%BB%84%E7%AD%96%E7%95%A5">3.配置组策略</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AEie%E6%A8%A1%E5%BC%8F">配置IE模式</a>
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%951%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0">方法1：直接添加</a></li>
+<li><a href="#%E6%96%B9%E6%B3%952%E4%BD%BF%E7%94%A8xml%E6%96%87%E4%BB%B6%E6%8E%A8%E8%8D%90">方法2：使用xml文件（推荐）</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AEflash">配置Flash</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF%E5%8F%82%E8%80%83">三、政策模板参考</a></li>
+<li><a href="#%E5%9B%9B-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">四、参考资料</a></li>
+</ul>
+(文章目录)</p>
+<h1 id="前言">前言</h1>
+<p>记录一下官方的解决方案。</p>
+<h1 id="一-准备">一、准备</h1>
+<p>支持组策略的 Windows 版本（需要专业版及以上）</p>
+<p><a href="https://cloud.google.com/chrome-enterprise/browser/download/">下载企业版Chrome</a>（包含 LBS支持插件、Chrome 政策模板，即组策略配置文件）</p>
+<hr>
+<p>Edge 用户需要两个工具：<br>
+<a href="https://www.microsoft.com/zh-cn/edge/business/download">下载并部署新型 Microsoft Edge 商业版</a>（选择好版本后，才能下载对应的政策模板）<br>
+<a href="https://www.microsoft.com/en-us/download/details.aspx?id=49974">Enterprise Mode Site List Manager</a>（用于配置IE模式）</p>
+<h1 id="二-配置">二、配置</h1>
+<h2 id="1安装浏览器">1.安装浏览器</h2>
+<p>两者解压后都是 msi 格式的安装包（例如GoogleChromeStandaloneEnterprise64.msi），安装过程全静默安装，默认在系统目录。</p>
+<h2 id="2导入政策模板">2.导入政策模板</h2>
+<p>以 Chrome 为例，将 admx 文件放在 C:\Windows\PolicyDefinitions 目录下，<br>
+<img src="https://img-blog.csdnimg.cn/20201212112231964.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+接着，将 zh-CN 和 en-US 目录下面的文件放在该目录的同名文件夹里面。</p>
+<p>Edge做法同理。</p>
+<p>Win + R 打开运行 gpedit.msc 打开组策略，在 计算机配置→管理模板 下面就能看到相关设置。<br>
+<img src="https://img-blog.csdnimg.cn/20201212112653533.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<h2 id="3配置组策略">3.配置组策略</h2>
+<p><em><strong>提示：浏览器地址栏输入 chrome://policy/ 可查看当前启用的策略。</strong></em></p>
+<h3 id="配置ie模式">配置IE模式</h3>
+<p><em><strong>注意：Chrome 的 LBS 的作用是将非列表内的网站全部用Chrome打开，开启后打开IE会直接跳转到Chrome。</strong></em><br>
+Chrome需要先安装 LegacyBrowserSupport.msi ，此插件会在IE中添加一个加载项，确保它是启用状态。</p>
+<p>Edge在安装的时候就会添加一个加载项。</p>
+<h4 id="方法1直接添加">方法1：直接添加</h4>
+<p>Google→Google Chrome→Legacy Browser Support→启用“旧版浏览器支持”功能（BrowserSwitcherEnabled）</p>
+<p>然后启用【要在替代浏览器中打开的网站（BrowserSwitcherUrlList）】，输入网址即可。</p>
+<h4 id="方法2使用xml文件推荐">方法2：使用xml文件（推荐）</h4>
+<p><strong>使用xml文件的好处是不需要单独配置，只需要配置好文件就可以在 Chrome 和 Edge 中使用。</strong></p>
+<p>使用上面安装的Enterprise Mode Site List Manager（具体使用方法参照下面的参考资料）。<br>
+<img src="https://img-blog.csdnimg.cn/20201212130338478.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NlcGFyYV9L,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy">比较简单的做法是点击 Add ，输入网站（不带http前缀），然后打勾 Allow Redirect后，点 Save 就可以了。</p>
+<p>然后左上角 File→save to XML，保存到一个好记的位置。</p>
+<p>之后如果要做出修改，改好后保存时覆盖原文件即可。</p>
+<p>Chrome 在启动 LBS 之后，启用【与包含要在替代浏览器中加载的网址的 XML 文件对应的网址（BrowserSwitcherExternalSitelistUrl）】，在文本框内填入 file:///d:/Documents/sites.xml （根据你保存的文件路径和文件名而定）。</p>
+<hr>
+<p>Microsoft Edge→配置 Internet Explorer 集成，设置【Internet Explorer 模式】<br>
+然后找到【配置企业模式站点列表】，同样的方法添加文件路径。</p>
+<p><em><strong>此外，还有一个方法是启用【允许 Internet Explorer 模式测试】，启用后将在 Edge浏览器的菜单→更多工具中出现【在 Internet Explorer 模式下打开站点】的选项，相当于双核浏览器的切换按钮。</strong></em></p>
+<h3 id="配置flash">配置Flash</h3>
+<p><em><strong>注：该方法只能针对特定网站开启 Flash，不能设置全局。</strong></em></p>
+<p>当前 Chrome（版本87）仅保留了【将 Flash 内容设置的涵盖面扩展到所有内容（RunAllFlashInAllowMode）】，考虑到未来版本可能会移除，本文不再赘述。</p>
+<hr>
+<p><em><strong>注：Edge 配置需要 87 以下版本，最新版本中<a href="https://docs.microsoft.com/zh-cn/DeployEdge/microsoft-edge-policies#pluginsallowedforurls">以下策略不再生效</a>。</strong></em></p>
+<p>Microsoft Edge→将 Adobe Flash 内容设置扩展到所有内容（RunAllFlashInAllowMode）</p>
+<p>Microsoft Edge→内容设置→允许对特定网站使用 Adobe Flash 插件（PluginsAllowedForUrls）</p>
+<p>Microsoft Edge→内容设置→默认 Adobe Flash 设置（DefaultPluginsSetting）</p>
+<h1 id="三-政策模板参考">三、政策模板参考</h1>
+<ul>
+<li><a href="https://cloud.google.com/docs/chrome-enterprise/policies">Chrome 企业版政策列表与管理</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/deployedge/microsoft-edge-policies">Microsoft Edge - 策略</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/deployedge/microsoft-edge-policy-map-chrome-to-newedge">Google Chrome 到 Microsoft Edge 策略映射</a></li>
+</ul>
+<h1 id="四-参考资料">四、参考资料</h1>
+<ul>
+<li><a href="https://support.google.com/chrome/a/answer/187202?hl=zh-Hans">为受管理的 PC 设置 Chrome 浏览器政策</a></li>
+<li><a href="https://support.google.com/chrome/a/answer/9268614?hl=en&amp;ref_topic=9270153">Legacy Browser Support (integrated) for Windows</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/DeployEdge/edge-ie-mode-policies#configure-internet-explorer-integration">配置 IE 模式策略</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/internet-explorer/ie11-deploy-guide/add-single-sites-to-enterprise-mode-site-list-using-the-version-2-enterprise-mode-tool">使用 Enterprise Mode Site List Manager（架构 v.2）将单个站点添加到企业模式站点列表</a></li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%B8%80-%E5%87%86%E5%A4%87">一、准备</a></li>
+<li><a href="#%E4%BA%8C-%E9%85%8D%E7%BD%AE">二、配置</a>
+<ul>
+<li><a href="#1%E5%AE%89%E8%A3%85%E6%B5%8F%E8%A7%88%E5%99%A8">1.安装浏览器</a></li>
+<li><a href="#2%E5%AF%BC%E5%85%A5%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF">2.导入政策模板</a></li>
+<li><a href="#3%E9%85%8D%E7%BD%AE%E7%BB%84%E7%AD%96%E7%95%A5">3.配置组策略</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AEie%E6%A8%A1%E5%BC%8F">配置IE模式</a>
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%951%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0">方法1：直接添加</a></li>
+<li><a href="#%E6%96%B9%E6%B3%952%E4%BD%BF%E7%94%A8xml%E6%96%87%E4%BB%B6%E6%8E%A8%E8%8D%90">方法2：使用xml文件（推荐）</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AEflash">配置Flash</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%94%BF%E7%AD%96%E6%A8%A1%E6%9D%BF%E5%8F%82%E8%80%83">三、政策模板参考</a></li>
+<li><a href="#%E5%9B%9B-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">四、参考资料</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://zip-sun.github.io/post/mi5s-an-zhuang-lineageos-16/">
+              <h3 class="post-title">
+                MI5s安装LineageOS 16
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://zip-sun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

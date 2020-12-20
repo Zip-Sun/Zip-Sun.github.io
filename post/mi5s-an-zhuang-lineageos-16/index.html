@@ -1,0 +1,305 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MI5s安装LineageOS 16 | Gridea</title>
+<link rel="shortcut icon" href="https://zip-sun.github.io/favicon.ico?v=1608464125799">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://zip-sun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="MI5s安装LineageOS 16 | Gridea - Atom Feed" href="https://zip-sun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+前言
+前提
+步骤速览
+
+前期准备
+刷入TWRP清除数据
+刷入系统
+
+线刷
+卡刷（我的选择）
+
+
+
+
+刷回MIUI
+
+准备
+步骤
+
+
+参考资料
+
+(目录)
+前言
+之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网查了一下。结合自己..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zip-sun.github.io">
+  <img class="avatar" src="https://zip-sun.github.io/images/avatar.png?v=1608464125799" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              MI5s安装LineageOS 16
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-12-20
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4%E9%80%9F%E8%A7%88">步骤速览</a>
+<ul>
+<li><a href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87">前期准备</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5twrp%E6%B8%85%E9%99%A4%E6%95%B0%E6%8D%AE">刷入TWRP清除数据</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5%E7%B3%BB%E7%BB%9F">刷入系统</a>
+<ul>
+<li><a href="#%E7%BA%BF%E5%88%B7">线刷</a></li>
+<li><a href="#%E5%8D%A1%E5%88%B7%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9">卡刷（我的选择）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%B7%E5%9B%9Emiui">刷回MIUI</a>
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87">准备</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+(目录)</p>
+<h1 id="前言">前言</h1>
+<p>之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网查了一下。结合自己的经验和遇到的问题，做出整理。</p>
+<h1 id="前提">前提</h1>
+<ol>
+<li><a href="https://www.miui.com/download-319.html">MIUI最新开发版刷机包</a></li>
+<li><a href="https://developer.android.com/studio/releases/platform-tools?hl=zh-cn">ADB</a>（Android SDK Platform-Tools）（<a href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn">CN链接</a>）</li>
+<li><a href="https://download.lineageos.org/capricorn">LineageOS</a></li>
+<li><a href="https://dl.twrp.me/capricorn">TWRP</a>（替换自带的Recovery）</li>
+<li><a href="ttps://opengapps.org">OpenGapps</a>（我选择的是ARM64+9.0+nano）（可选）</li>
+<li><a href="https://download.lineageos.org/extras">SU</a>（可选）</li>
+<li><a href="https://developer.android.com/studio/run/win-usb">ADB驱动</a>（启动USB调试后电脑无法安装驱动时使用）（<a href="https://developer.android.google.cn/studio/run/win-usb">CN链接</a>）</li>
+</ol>
+<h1 id="步骤速览">步骤速览</h1>
+<h2 id="前期准备">前期准备</h2>
+<ol>
+<li><strong>刷机前先备份数据（玩国际服游戏的记得先把引继码记下来）</strong></li>
+<li>下载 LineageOS 16.0 最新版本，TWRP 最新版本，ADB安装包和驱动，SU包，MIUI最新开发版；</li>
+<li>解锁手机设备。<br>
+手机设置 -&gt; 开发者选项 -&gt; 设备解锁状态”中绑定账号和设备，根据官方教程解锁；<br>
+手动进入Bootloader模式（关机后，同时按住开机键和音量下键）；通过USB连接手机，点击 “解锁”按钮；</li>
+<li>解压ADB包到一个电脑位置，如：D:\adb；</li>
+<li>电脑中，打开“高级系统设置&quot;，打开”高级“标签，打开“环境变量”，“系统变量”中选择path，并点击“编辑”；</li>
+<li>变量值末尾添加“D:\adb；（与ADB解压路径名一致）；确定；</li>
+<li>测试在CMD中输入adb回车后是否能够正常使用；</li>
+</ol>
+<h2 id="刷入twrp清除数据">刷入TWRP清除数据</h2>
+<ol start="8">
+<li>设置→我的设备→全部参数，连续按MIUI版本，开启开发者选项。</li>
+<li>更多设置→开发者选项，开启USB调试；</li>
+<li>手机连接电脑，CMD 下输入 adb devices 看手机是否能弹出调试授权窗口；<strong>（我这里没有正常识别到设备，见参考资料[3]）</strong></li>
+<li>输入“adb reboot bootloader”，回车，手机界面出现fastboot和安卓兔；</li>
+<li>cmd命令窗口，输入“fastboot devices”，回车，命令窗口出现设备编号；</li>
+<li>cmd命令窗口，输入“fastboot flash recovery”， 将下载的TWRP文件拖入命令窗口，回车，等待安装完成；<br>
+（也可以Fastboot flash recovery “安装包路径名”，回车）</li>
+<li>直接按 volume up+power键出现MI，进入 Team Recovery 界面（如果重启了手机则系统回刷回原Recovery）；</li>
+<li>选择“清除”--“高级清除”--选择除内部存储和USB以外的各项；“清除”--“格式化data分区”；</li>
+</ol>
+<h2 id="刷入系统">刷入系统</h2>
+<p>这里分为两种方法：</p>
+<h3 id="线刷">线刷</h3>
+<ol start="16">
+<li>选择“高级选项”--“ADB sideload”--滑动确认；</li>
+<li>电脑进入cmd命令窗口，输入“Adb sideload”，拖入MIUI安装包，回车，等待安装完成；</li>
+<li>安装成功后再进入TWRP，电脑进入cmd命令窗口，输入“Adb sideload”，拖入LineageOS 16.0安装包，回车，等待安装完成（刷入OS包时，最好选择双清）；</li>
+<li>重复此过程，安装Google apps（必须）；</li>
+<li>重复此过程，安装SU（可选）；</li>
+<li>重启手机，进入Lineage系统，安装完成。</li>
+</ol>
+<h3 id="卡刷我的选择">卡刷（我的选择）</h3>
+<ol start="16">
+<li>启动TWRP后电脑的USB能识别到U盘，将MIUI的包放进去。</li>
+<li>点击“安装”，刷入镜像，将MIUI刷入。</li>
+<li>相同的方法再安装LineageOS，刷入。</li>
+<li>视情况再安装其他如Gapps、SU、Magisk等等。</li>
+</ol>
+<h1 id="刷回miui">刷回MIUI</h1>
+<h2 id="准备">准备</h2>
+<ol>
+<li><a href="https://www.xiaomiflash.com/">Xiaomi Flash Tool</a></li>
+<li>MIUI刷机包</li>
+</ol>
+<h2 id="步骤">步骤</h2>
+<p>（懒得写了）</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://www.lineageos.org.cn/thread-1000-1-1.html">安卓手机小米5s的LineageOS 16.0刷机教程</a></li>
+<li><a href="https://wiki.lineageos.org/devices/capricorn/install">Install LineageOS on capricorn</a></li>
+<li><a href="https://www.cnblogs.com/wx170119/p/13092595.html">Win7连接手机提示ADB Interface 找不到驱动程序 解决办法</a></li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4%E9%80%9F%E8%A7%88">步骤速览</a>
+<ul>
+<li><a href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87">前期准备</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5twrp%E6%B8%85%E9%99%A4%E6%95%B0%E6%8D%AE">刷入TWRP清除数据</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5%E7%B3%BB%E7%BB%9F">刷入系统</a>
+<ul>
+<li><a href="#%E7%BA%BF%E5%88%B7">线刷</a></li>
+<li><a href="#%E5%8D%A1%E5%88%B7%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9">卡刷（我的选择）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%B7%E5%9B%9Emiui">刷回MIUI</a>
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87">准备</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://zip-sun.github.io/post/ban-gong-shi-lian-jie-da-yin-ji/">
+              <h3 class="post-title">
+                办公室连接打印机
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://zip-sun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
