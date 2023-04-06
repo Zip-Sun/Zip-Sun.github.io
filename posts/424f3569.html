@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>小米 MI5s 刷机 LineageOS 16 | Separaの秘密小屋</title><meta name="author" content="Separa"><meta name="copyright" content="Separa"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网重新学习了一下。结合自己的经验和遇到的问题，做出整理。 友情提醒： 刷机有风险，搞机需谨慎。不要使用自己的常用手机刷机！！！不要使用自己的常用手机刷机！！！不要使用自己的常用手机刷机！！！ 前期准备 MIUI最新刷机包（目前小米社区已不再提供开发版刷机包，经测试稳定版也可以） Xiaomi Flash Tool（用于刷回MIUI作为底">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小米 MI5s 刷机 LineageOS 16">
+<meta property="og:url" content="https://zip-sun.github.io/posts/424f3569.html">
+<meta property="og:site_name" content="Separaの秘密小屋">
+<meta property="og:description" content="前言之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网重新学习了一下。结合自己的经验和遇到的问题，做出整理。 友情提醒： 刷机有风险，搞机需谨慎。不要使用自己的常用手机刷机！！！不要使用自己的常用手机刷机！！！不要使用自己的常用手机刷机！！！ 前期准备 MIUI最新刷机包（目前小米社区已不再提供开发版刷机包，经测试稳定版也可以） Xiaomi Flash Tool（用于刷回MIUI作为底">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zip-sun.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2020-12-12T02:48:19.000Z">
+<meta property="article:modified_time" content="2023-01-29T09:38:53.000Z">
+<meta property="article:author" content="Separa">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zip-sun.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zip-sun.github.io/posts/424f3569.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '小米 MI5s 刷机 LineageOS 16',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-29 17:38:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default_top_img.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Separaの秘密小屋"><span class="site-name">Separaの秘密小屋</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">小米 MI5s 刷机 LineageOS 16</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-12T02:48:19.000Z" title="发表于 2020-12-12 10:48:19">2020-12-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-29T09:38:53.000Z" title="更新于 2023-01-29 17:38:53">2023-01-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="小米 MI5s 刷机 LineageOS 16"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前有个旧手机想再刷个机凑合用一下，但是自己忘了怎么刷，上网重新学习了一下。结合自己的经验和遇到的问题，做出整理。</p>
+<p>友情提醒：</p>
+<p><font color="red">刷机有风险，搞机需谨慎。<br>不要使用自己的常用手机刷机！！！<br>不要使用自己的常用手机刷机！！！<br>不要使用自己的常用手机刷机！！！</font></p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.miui.com/download-319.html">MIUI最新刷机包</a>（目前小米社区已不再提供开发版刷机包，经测试稳定版也可以）</li>
+<li><a target="_blank" rel="noopener" href="https://xiaomiflashtool.com/">Xiaomi Flash Tool</a>（用于刷回MIUI作为底包）</li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platform-tools?hl=zh-cn">ADB</a>（Android SDK Platform-Tools）（<a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn">CN链接</a>）</li>
+<li><a target="_blank" rel="noopener" href="https://download.lineageos.org/capricorn">LineageOS</a>（官方已经停止维护 Mi5s，历史版本需要从<a target="_blank" rel="noopener" href="https://archive.org/download/lineageos20210217/roms/capricorn/">互联网博物馆</a>下载）</li>
+<li><a target="_blank" rel="noopener" href="https://dl.twrp.me/capricorn">TWRP</a>（替换自带的Recovery）</li>
+<li><a target="_blank" rel="noopener" href="https://opengapps.org/">OpenGapps</a>（我选择的是ARM64+9.0+nano）（可选）<br> 官方推荐方案为 <a target="_blank" rel="noopener" href="https://wiki.lineageos.org/gapps">MindTheGapps</a></li>
+<li><a target="_blank" rel="noopener" href="https://download.lineageos.org/extras">SU</a>（开启root权限，也可以使用Magisk）（可选）</li>
+<li><del><a target="_blank" rel="noopener" href="https://developer.android.com/studio/run/win-usb">Google USB 驱动程序</a>（启动USB调试后电脑找不到设备时使用）（<a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/run/win-usb">CN链接</a>）</del>（初次启动 MiFlashTool 会自己检查驱动问题）</li>
+</ol>
+<p>以上内容都下载完大概包含以下文件：</p>
+<ul>
+<li>【MIUI线刷包】miui_MI5S_V11.0.2.0.OAGCNXM_6ce204eb2c_8.0.zip</li>
+<li>【MIUI卡刷包】capricorn_images_V11.0.2.0.OAGCNXM_20191023.0000.00_8.0_cn_714988e4b7.tgz</li>
+<li>【MiFlash】MiFlash2020-3-14-0.rar</li>
+<li>【ADB】platform-tools-latest-windows.zip</li>
+<li>【LineageOS】lineage-16.0-20210210-nightly-capricorn-signed.zip</li>
+<li>【TWRP】twrp-3.7.0_9-0-capricorn.img</li>
+<li>【MindTheGapps】MindTheGapps-9.0.0-arm64-20190615_031441.zip</li>
+<li>【SU】addonsu-16.0-arm64-signed.zip</li>
+</ul>
+<h1 id="刷机步骤"><a href="#刷机步骤" class="headerlink" title="刷机步骤"></a>刷机步骤</h1><h2 id="刷机前"><a href="#刷机前" class="headerlink" title="刷机前"></a>刷机前</h2><p>刷机前建议按照以下清单进行检查：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 退出已登录的 Google 账户（从系统设置——账号里移除）</li>
+<li><input disabled="" type="checkbox"> 去掉屏幕锁屏（密码和指纹都去掉）</li>
+<li><input disabled="" type="checkbox"> 开发者选项已开启（设置→我的设备→全部参数，连续按MIUI版本，开启开发者选项）</li>
+<li><input disabled="" type="checkbox"> ADB 调试已开启（更多设置→开发者选项，开启USB调试）</li>
+<li><input disabled="" type="checkbox"> 小米手机已解锁（手机设置 –&gt; 开发者选项 –&gt; 设备解锁状态中绑定账号和设备，根据<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/1838933099553208660.html">官方教程</a>解锁）</li>
+<li><input disabled="" type="checkbox"> 游戏存档已备份（玩国际服游戏的记得先把引继码记下来）</li>
+<li><input disabled="" type="checkbox"> 重要短信已备份</li>
+<li><input disabled="" type="checkbox"> 以下文件夹已备份：<ul>
+<li><input disabled="" type="checkbox"> Download（含浏览器下载文件）</li>
+<li><input disabled="" type="checkbox"> DCIM（含照片和录像）</li>
+<li><input disabled="" type="checkbox"> Pictures（已保存的图片、截屏）</li>
+<li><input disabled="" type="checkbox"> Movies（录屏等）</li>
+<li><input disabled="" type="checkbox"> Documents</li>
+<li><input disabled="" type="checkbox"> 网盘或下载器下载的文件</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 通话录音与录音机录音已备份</li>
+<li><input disabled="" type="checkbox"> 微信等软件聊天记录已备份</li>
+<li><input disabled="" type="checkbox"> 确保电池健康且电量在80%以上</li>
+</ul>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><ol>
+<li>解压ADB包到一个电脑位置，如：D:\platform-tools；</li>
+<li>电脑中，打开“高级系统设置”，打开”高级“标签，打开“环境变量”，“系统变量”中选择path，并点击“编辑”；</li>
+<li>变量值末尾添加“D:\platform-tools；（与ADB解压路径名一致）；确定；</li>
+<li>测试在CMD中输入 <code>adb</code> ，回车后是否能够正常使用；</li>
+</ol>
+<h2 id="刷-MIUI-底包"><a href="#刷-MIUI-底包" class="headerlink" title="刷 MIUI 底包"></a>刷 MIUI 底包</h2><p>（如果已经是最新版MIUI可以跳过此步，也可以选择不用 MiFlash 而用 TWRP 刷入）</p>
+<h3 id="使用-MiFlash"><a href="#使用-MiFlash" class="headerlink" title="使用 MiFlash"></a>使用 MiFlash</h3><ol>
+<li>解压 MiFlash，启动 XiaoMiFlash.exe。（<strong>启动时会提示安装驱动，安装即可，可解决ADB和fastboot找不到驱动的问题</strong>）</li>
+<li>下载最新版MIUI线刷包，手机连接电脑，CMD 下输入 <code>adb devices</code> 看手机是否能弹出调试授权窗口；</li>
+<li>输入 <code>adb reboot bootloader</code>，进入fastboot界面；</li>
+<li>解压刷机包，在MiFlash中点击【选择】，选择解压的刷机包文件夹；</li>
+<li>点击【加载设备】，确认设备已加载。；</li>
+<li>下面选择【全部删除】；（不要选择lock）</li>
+<li>之后点【刷机】；</li>
+<li>等待重启。</li>
+<li>完成设置进入系统后，检查开发者选项里【OEM解锁】是否是已解锁手机，如果已上锁则需要重新解锁。</li>
+</ol>
+<h3 id="使用-TWRP"><a href="#使用-TWRP" class="headerlink" title="使用 TWRP"></a>使用 TWRP</h3><p>与后面刷入 LineageOS 方法相同，在刷入 LineageOS 之前先刷入 MIUI 的卡刷包，之后再双清，再刷入 LineageOS。</p>
+<h2 id="刷入TWRP"><a href="#刷入TWRP" class="headerlink" title="刷入TWRP"></a>刷入TWRP</h2><ol>
+<li>cmd命令窗口，输入 <code>adb reboot bootloader</code>，回车，重启进入 fastboot；</li>
+<li>cmd命令窗口，输入 <code>fastboot devices</code>，回车，命令窗口出现设备编号；</li>
+<li>cmd命令窗口，输入 <code>fastboot flash recovery</code>， 空一格，将下载的TWRP文件拖入命令窗口，回车，等待安装完成；</li>
+<li>直接按 音量增 + 电源键出现MI，之后进入 TeamWin Recovery 界面；（如果没有进入TWRP而是进入系统则表示刷入TWRP失败）</li>
+<li>如果刷入失败，cmd命令窗口，输入 <code>fastboot boot</code>， 空一格，将下载的TWRP文件拖入命令窗口，回车，刷入临时Recovery并自动进入。</li>
+<li>进入后选择【Select Language】更改语言为简体中文。</li>
+</ol>
+<h2 id="刷入系统"><a href="#刷入系统" class="headerlink" title="刷入系统"></a>刷入系统</h2><h3 id="清除已安装系统"><a href="#清除已安装系统" class="headerlink" title="清除已安装系统"></a>清除已安装系统</h3><p>选择“清除”–“高级清除”–选择除内部存储和USB以外的各项；“清除”–“格式化data分区”（如果已经备份数据也可以全部清除）</p>
+<p>刷入系统这里分为两种方法：</p>
+<h3 id="线刷（系统包在电脑里）"><a href="#线刷（系统包在电脑里）" class="headerlink" title="线刷（系统包在电脑里）"></a>线刷（系统包在电脑里）</h3><ol>
+<li>选择“高级选项”–“ADB sideload”–勾选清除缓存–滑动确认；</li>
+<li>电脑进入cmd命令窗口，输入 <code>Adb sideload</code>，空一格，拖入LineageOS 的系统包，回车，等待安装完成；</li>
+<li>重复此过程，安装Google apps、SU 等；</li>
+<li>重启手机，进入Lineage系统，安装完成。</li>
+</ol>
+<h3 id="卡刷（系统包在手机里）"><a href="#卡刷（系统包在手机里）" class="headerlink" title="卡刷（系统包在手机里）"></a>卡刷（系统包在手机里）</h3><ol>
+<li>启动TWRP后电脑的USB能识别到U盘，将 LineageOS 的压缩包放进去。</li>
+<li>点击“安装”，刷入镜像，将 LineageOS 刷入。</li>
+<li>视情况再安装其他如 Gapps、SU、Magisk 等等。</li>
+</ol>
+<h2 id="原生系统已知问题"><a href="#原生系统已知问题" class="headerlink" title="原生系统已知问题"></a>原生系统已知问题</h2><h3 id="去掉-WiFi-叉号"><a href="#去掉-WiFi-叉号" class="headerlink" title="去掉 WiFi 叉号"></a>去掉 WiFi 叉号</h3><p>WiFi 探测服务器问题，安卓设备在连接一个 WiFi 后便会请求一个网址并等待返回 204 状态码，如果返回了 204 状态码则可证明此 WiFi 网络连通可用，但是由于众所周知的原因，这个网址在国内连接不上，因此屏幕右上角的 WiFi 标志一直带有一个 X 号并且在 WiFi 范围内不会主动连接，需要设置captive Portal：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global captive_portal_http_url http://www.google.cn/generate_204</span><br><span class="line">adb shell settings put global captive_portal_https_url https://www.google.cn/generate_204</span><br></pre></td></tr></table></figure>
+<p>重启手机</p>
+<h3 id="修改NTP服务器"><a href="#修改NTP服务器" class="headerlink" title="修改NTP服务器"></a>修改NTP服务器</h3><p>不插 SIM 卡情况下无法校准时间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb shell settings put global ntp_server ntp1.aliyun.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="Root-相关"><a href="#Root-相关" class="headerlink" title="Root 相关"></a>Root 相关</h2><h3 id="Magisk"><a href="#Magisk" class="headerlink" title="Magisk"></a>Magisk</h3><p>（提供 root 权限，但与 LineageOS 官方提供的 su 冲突，如已经使用，请先使用 su removal 清除）<br>（Magisk 24 以上已放弃 Riru 改为 Zygisk，本文采用最新版）</p>
+<ol>
+<li>下载<a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/releases">最新版本的 Magisk</a></li>
+<li>将 扩展名 apk 改为 zip</li>
+<li>使用 TWRP 刷入后，清除 cache 后，重启系统</li>
+</ol>
+<h3 id="LSPosed"><a href="#LSPosed" class="headerlink" title="LSPosed"></a>LSPosed</h3><p>用来安装 XPosed 框架。</p>
+<ol>
+<li>Magisk app 设置中，启动 Zygisk，重启</li>
+<li>下载<a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPosed/releases">最新版本的 LSPosed</a></li>
+<li>Magisk app——模块——从本地安装</li>
+</ol>
+<h3 id="Shamiko"><a href="#Shamiko" class="headerlink" title="Shamiko"></a>Shamiko</h3><p>用于对其他应用隐藏 Magisk 和 root（类似于MagiskHide）</p>
+<ol>
+<li>Magisk app 设置中，关闭【遵守排除列表】，重启</li>
+<li>下载<a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPosed.github.io/releases">最新版本的 Shamiko</a></li>
+<li>Magisk app——模块——从本地安装</li>
+<li>从Magisk app 设置中，根据【配置排除列表】设置即可</li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.lineageos.org.cn/thread-1000-1-1.html">安卓手机小米5s的LineageOS 16.0刷机教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.lineageos.org/devices/capricorn/install">Install LineageOS on capricorn</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wx170119/p/13092595.html">Win7连接手机提示ADB Interface 找不到驱动程序 解决办法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/29564556">『精装修毛坯房』如何舒服地使用类原生系统</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://zip-sun.github.io">Separa</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zip-sun.github.io/posts/424f3569.html">https://zip-sun.github.io/posts/424f3569.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zip-sun.github.io" target="_blank">Separaの秘密小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/684eea1.html" title="尝试排查 Windows 8.1 中 System 进程占用 CPU 过高的问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">尝试排查 Windows 8.1 中 System 进程占用 CPU 过高的问题</div></div></a></div><div class="next-post pull-right"><a href="/posts/3e60c476.html" title="办公室连接打印机"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">办公室连接打印机</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/235f6bb1.html" title="我的装机必备"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">我的装机必备</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Separa</div><div class="author-info__description">岂能尽如人意，但求无愧我心</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zip-Sun"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的秘密小屋</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.</span> <span class="toc-text">刷机步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA%E5%89%8D"><span class="toc-number">3.1.</span> <span class="toc-text">刷机前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7-MIUI-%E5%BA%95%E5%8C%85"><span class="toc-number">3.3.</span> <span class="toc-text">刷 MIUI 底包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-MiFlash"><span class="toc-number">3.3.1.</span> <span class="toc-text">使用 MiFlash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-TWRP"><span class="toc-number">3.3.2.</span> <span class="toc-text">使用 TWRP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7%E5%85%A5TWRP"><span class="toc-number">3.4.</span> <span class="toc-text">刷入TWRP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7%E5%85%A5%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.5.</span> <span class="toc-text">刷入系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E5%B7%B2%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.5.1.</span> <span class="toc-text">清除已安装系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E5%88%B7%EF%BC%88%E7%B3%BB%E7%BB%9F%E5%8C%85%E5%9C%A8%E7%94%B5%E8%84%91%E9%87%8C%EF%BC%89"><span class="toc-number">3.5.2.</span> <span class="toc-text">线刷（系统包在电脑里）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A1%E5%88%B7%EF%BC%88%E7%B3%BB%E7%BB%9F%E5%8C%85%E5%9C%A8%E6%89%8B%E6%9C%BA%E9%87%8C%EF%BC%89"><span class="toc-number">3.5.3.</span> <span class="toc-text">卡刷（系统包在手机里）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="toc-number">3.6.</span> <span class="toc-text">原生系统已知问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E6%8E%89-WiFi-%E5%8F%89%E5%8F%B7"><span class="toc-number">3.6.1.</span> <span class="toc-text">去掉 WiFi 叉号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9NTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">3.6.2.</span> <span class="toc-text">修改NTP服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-%E7%9B%B8%E5%85%B3"><span class="toc-number">3.7.</span> <span class="toc-text">Root 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Magisk"><span class="toc-number">3.7.1.</span> <span class="toc-text">Magisk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LSPosed"><span class="toc-number">3.7.2.</span> <span class="toc-text">LSPosed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shamiko"><span class="toc-number">3.7.3.</span> <span class="toc-text">Shamiko</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/e1d24464.html" title="琐碎笔记">琐碎笔记</a><time datetime="2023-04-06T06:09:59.000Z" title="发表于 2023-04-06 14:09:59">2023-04-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3e1b0329.html" title="日常琐记">日常琐记</a><time datetime="2023-03-17T12:16:00.000Z" title="发表于 2023-03-17 20:16:00">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/34c7b2c1.html" title="一个Flash作者的过去">一个Flash作者的过去</a><time datetime="2023-03-14T14:19:12.000Z" title="发表于 2023-03-14 22:19:12">2023-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/7f185159.html" title="ImageMagick 使用教程">ImageMagick 使用教程</a><time datetime="2023-03-04T13:34:38.000Z" title="发表于 2023-03-04 21:34:38">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4788fce5rq.html" title="Hexo 搭建指南">Hexo 搭建指南</a><time datetime="2023-02-26T14:58:20.000Z" title="发表于 2023-02-26 22:58:20">2023-02-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Separa</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
